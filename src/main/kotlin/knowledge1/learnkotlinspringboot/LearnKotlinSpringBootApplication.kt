@@ -1,4 +1,4 @@
-package knowledge.learnkotlinspringboot
+package knowledge1.learnkotlinspringboot
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
