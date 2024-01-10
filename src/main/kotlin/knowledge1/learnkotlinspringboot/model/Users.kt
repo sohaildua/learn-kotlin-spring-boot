@@ -1,4 +1,4 @@
-package knowledge1.learnkotlinspringboot.pojo
+package knowledge1.learnkotlinspringboot.model
 
 import org.jetbrains.exposed.sql.Column
 import org.jetbrains.exposed.sql.Table
