@@ -8,7 +8,10 @@ import org.flywaydb.core.Flyway
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.slf4j.LoggerFactory
+import org.springframework.stereotype.Component
 import javax.sql.DataSource
+
+@Component
 object DatabaseFactory {
 
     private val log = LoggerFactory.getLogger(this::class.java)
