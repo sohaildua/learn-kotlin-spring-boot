@@ -7,20 +7,25 @@ import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
 @Transactional
-class UserService(private val databaseFactory: DatabaseFactory){
+class UserService @Autowired constructor(private val databaseFactory: DatabaseFactory) {
 
-    val userDtos = transaction {
+    init {
+        // Create user table on service initialization
+        createUsersTable()
+    }
+
+    fun getAllUsers(): List<User> = transaction {
         databaseFactory.connectAndMigrate()
         Users.selectAll().map { mapToUserDto(it) }
     }
 
-
-    fun mapToUserDto(it: ResultRow) = User(
+    private fun mapToUserDto(it: ResultRow) = User(
         id = it[Users.id],
         firstName = it[Users.firstName],
         lastName = it[Users.lastName],
@@ -29,10 +34,8 @@ class UserService(private val databaseFactory: DatabaseFactory){
         email = it[Users.email]
     )
 
-     val createUsers = transaction {
-             //Create user table
-                 databaseFactory.connectAndMigrate()
-
-             SchemaUtils.create(Users)
+    private fun createUsersTable() = transaction {
+        databaseFactory.connectAndMigrate()
+        SchemaUtils.create(Users)
     }
 }
