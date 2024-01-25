@@ -12,5 +12,3 @@ import kotlinx.coroutines.runBlocking
     }
     println("Hello") // main coroutine continues while a previous one is delayed
 }
-
-
