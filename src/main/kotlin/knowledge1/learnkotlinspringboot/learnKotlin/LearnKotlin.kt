@@ -7,4 +7,5 @@ fun main (){
 
     fun data(string: String, dataFunc:(String) -> String):String = "this is my life ${dataFunc(string)}"
     print(data("yolo"){ z -> z.reversed()})
+
 }
